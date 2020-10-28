@@ -52,7 +52,6 @@ def count_bananas_per_hour(piles, free_hours):
     greater_value = sorted_piles[-1]
     last_index = 0
     for index in range(len(sorted_piles) - 2, -1):
-        increase()
         bananas_per_hour = sorted_piles[index]
         smaller_value = bananas_per_hour
         if not is_bananas_per_hour_suitable(bananas_per_hour, sorted_piles, free_hours, index):
