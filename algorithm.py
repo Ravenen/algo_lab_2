@@ -129,3 +129,8 @@ def is_bananas_per_hour_suitable(bananas_per_hour, piles, free_hours, current_in
 if __name__ == '__main__':
     import doctest
     doctest.testmod(verbose=True)
+
+    piles = [30, 11, 23, 4, 20]
+    hours = 5
+    bananas_per_hour = count_bananas_per_hour(piles, hours)
+    print(bananas_per_hour)
