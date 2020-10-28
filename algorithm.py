@@ -10,7 +10,9 @@ def merge_sort(input_array):
     if len(input_array) == 1:
         return input_array
 
-    middle_pos = int(len(input_array) / 2)
+    # increase()
+
+    middle_pos = len(input_array) // 2
     end_pos = len(input_array)
 
     left_part = merge_sort(input_array[0:middle_pos])
@@ -54,5 +56,35 @@ def binary_search(min_value, max_value, piles, free_hours, index):
 
 
 def count_bananas_per_hour(piles, free_hours):
-    pass
+    sorted_piles = merge_sort(piles)
 
+    if len(sorted_piles) == free_hours:
+        return sorted_piles[-1]
+
+    greater_value = sorted_piles[-1]
+    last_index = 0
+    for index in range(len(sorted_piles) - 2, -1):
+        increase()
+        bananas_per_hour = sorted_piles[index]
+        smaller_value = bananas_per_hour
+        if not is_bananas_per_hour_suitable(bananas_per_hour, sorted_piles, free_hours, index):
+            last_index = index
+            break
+        greater_value = bananas_per_hour
+    else:
+        smaller_value = 0
+
+    return binary_search(smaller_value, greater_value, sorted_piles, free_hours, last_index)
+
+
+def is_bananas_per_hour_suitable(bananas_per_hour, piles, free_hours, current_index):
+    total_hours = current_index
+    for pile in piles[current_index:]:
+        increase()
+        total_hours += (pile // bananas_per_hour) + (1 if (pile % bananas_per_hour) > 0 else 0)
+    # print(bananas_per_hour, current_index, total_hours)
+    return total_hours <= free_hours
+
+
+if __name__ == '__main__':
+    print(count_bananas_per_hour([30, 11, 23, 4, 20], 6))
