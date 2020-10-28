@@ -1,3 +1,11 @@
+count = 0
+
+
+def increase():
+    global count
+    count += 1
+
+
 def merge_sort(input_array):
     if len(input_array) == 1:
         return input_array
@@ -30,6 +38,19 @@ def merge(left_part, right_part):
         result_array.extend(right_part[right_index:])
 
     return result_array
+
+
+def binary_search(min_value, max_value, piles, free_hours, index):
+    if abs(max_value-min_value) == 1:
+        return max_value
+
+    increase()
+
+    middle_value = (min_value + max_value) // 2
+    if is_bananas_per_hour_suitable(middle_value, piles, free_hours, index):
+        return binary_search(min_value, middle_value, piles, free_hours, index)
+    else:
+        return binary_search(middle_value, max_value, piles, free_hours, index)
 
 
 def count_bananas_per_hour(piles, free_hours):
